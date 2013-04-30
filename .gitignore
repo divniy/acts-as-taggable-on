@@ -3,6 +3,7 @@
 /pkg/*
 .bundle
 .ruby-version
+.ruby-gemset
 spec/database.yml
 tmp*.sw?
 *.sw?

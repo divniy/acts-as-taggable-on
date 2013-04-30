@@ -191,13 +191,13 @@ module ActsAsTaggableOn::Taggable
           having = "COUNT(#{taggings_alias}.taggable_id) = #{tags.size}"
         end
 
-        select(select_clause) \
-          .joins(joins.join(" ")) \
-          .where(conditions.join(" AND ")) \
-          .group(group) \
-          .having(having) \
-          .order(options[:order]) \
-          .readonly(false)
+        select = select(select_clause)
+        select = select.joins(joins.join(" "))
+        select = select.where(conditions.join(" AND "))
+        select = select.group(group)
+        select = select.having(having) if having.present?
+        select = select.order(options[:order])
+        select.readonly(false)
       end
 
       def is_taggable?
